@@ -1,32 +1,32 @@
-$(document).ready(function (e) {
-   e.preventDefault();
-   const $employeeCard = $('#employee-card');
-   const $employeeContactInfo = $('#employee-contact-info');
-   const $employeeAvatar = $('#employee-avatar');
-   const $employeeName = $('#employee-name');
-   const $employeeEmail = $('#employee-email');
-   const $employeeLocation = $('#employee-location');
 
-    // the AJAX part
-    var randomUserAPI = {
-          url: 'https://randomuser.me/api/?format=json&inc=picture,name,email,location,phone,dob&results=12&callback=randomuserdata',
-          dataType: 'json',
-          success: function(data) {
-            console.log(data);
-        };
+$(document).ready(function() {
+  $.ajax({
+  url: 'https://randomuser.me/api/?format=json&inc=picture,name,email,location,phone,dob&results=12',
+  dataType: 'json',
+  type: 'GET',
+  success: function(data) {
+    console.log('ajax request success');
+    console.log(data);
+  },
+  error: function(potato) {
+    console.log('error', potato);
+  }
+});
+});
 
+const employeeCard = document.getElementById('employee-card');
 
-    function displayEmployees(data) {
-      var employeeCardHTML = '<div>';
-      $.each(data.items,function(i,card) {
-        employeeCardHTML += '<img src=' + card.picture + ' class="employee-avatar">';
-        employeeCardHTML += '<div class="employee-contact-info"'>;
-        employeeCardHTML += '<h2 class="employee-name">' + card.name + '</h2>';
-        employeeCardHTML += '<p class="employee-email"><a href="' + card.email + '"> </p>';
-        employeeCardHTML += '<p class="employee-location">' + card.location + '</p>';
-      }); // end each
-      employeeCardHTML += '</div>';
-      employeeCardHTML += '</div>';
-      $(employeeCard).html(employeeCardHTML);
-    }
-    $.getJSON(randomUserAPI, displayEmployees); //need to get this to go with my code
+const template = results => {
+  return '<img src="${results.picture.medium}" id="employee-avatar" class="employee-avatar" alt="Employee Picture">
+        <div id="employee-contact-info" class="employee-contact-info">
+          <h2 id="employee-name" class="employee-name">${results.name.first} ${results.name.last}</h2>
+          <p id="employee-email" class="employee-email">${results.email}<a href=""></a></p>
+          <p id="employee-location" class="employee-location">${results.location.city}</p>
+        </div>
+      </div>';
+};
+
+fetch('https://randomuser.me/api/?format=json&inc=picture,name,email,location,phone,dob&results=12', { method: 'get' })
+  .then(response => response.json())
+  .then(data => data.results.forEach(result => employeeCard.innerHTML += template(result)))
+  .catch(error => console.log(error));
