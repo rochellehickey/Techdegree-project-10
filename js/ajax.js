@@ -6,27 +6,30 @@ $(document).ready(function() {
     success: function(data) {
       console.log('ajax request success');
       console.log(data);
+
+      $('#employee-card').load('https://randomuser.me/api/?format=json&inc=picture,name,email,location,phone,dob&results=12', function(results) {
+            $('#employee-card').each(
+              $('#employee-card').innerHTML += '<img src="' + ${results.picture.medium} + '" id="employee-avatar" class="employee-avatar" alt="Employee Picture">';
+              $('#employee-card').innerHTML += '<div id="employee-contact-info" class="employee-contact-info">';
+              $('#employee-card').innerHTML += '<h2 id="employee-name" class="employee-name">' + ${results.name.first} + ' ' + ${results.name.last} + '</h2>';
+              $('#employee-card').innerHTML += '<p id="employee-email" class="employee-email">' + ${results.email} + '<a href=""></a></p>';
+              $('#employee-card').innerHTML += '<p id="employee-location" class="employee-location">' + ${results.location.city} + '</p>';
+              $('#employee-card').innerHTML += '</div>';
+              $('#employee-card').innerHTML += '</div>';
+            );
+          }
+        );
+
+
+
+
+
       },
     error: function(potato) {
       console.log('error', potato);
     }
   });
 
-  $('#employee-card').load("index.html", function() {
-    const template = results => {
-      console.log("outside of each");
-      // $('#employee-card').each(
-      //   console.log("inside of each");
-      //   // employeeCard.innerHTML += '<img src="' + ${results.picture.medium} + '" id="employee-avatar" class="employee-avatar" alt="Employee Picture">';
-      //   // employeeCard.innerHTML += '<div id="employee-contact-info" class="employee-contact-info">';
-      //   // employeeCard.innerHTML += '<h2 id="employee-name" class="employee-name">' + ${results.name.first} + ' ' + ${results.name.last} + '</h2>';
-      //   // employeeCard.innerHTML += '<p id="employee-email" class="employee-email">' + ${results.email} + '<a href=""></a></p>';
-      //   // employeeCard.innerHTML += '<p id="employee-location" class="employee-location">' + ${results.location.city} + '</p>';
-      //   // employeeCard.innerHTML += '</div>';
-      //   // employeeCard.innerHTML += '</div>';
-      // );
-    }
-  });
 
 
 
