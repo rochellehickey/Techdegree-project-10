@@ -22,15 +22,17 @@ $(document).ready(function() {
         .then((response) => response.json())
         .then(function(data){
           data.results.forEach(person => {
-            p = `<img src="${picture.medium}" id="employee-avatar" class="employee-avatar" alt="Employee Picture">
+            p = `<div id="employee-card" class="employee-card"> <!-- EMPLOYEE CARD -->
+            <img src="${person.picture.medium}" id="employee-avatar" class="employee-avatar" alt="Employee Picture">
             <div id="employee-contact-info" class="employee-contact-info">
-            <h2 id="employee-name" class="employee-name"> ${name.first} ${name.last}</h2>
-            <p id="employee-email" class="employee-email"> ${email} <a href=""></a></p>
-            <p id="employee-location" class="employee-location"> ${results.location.city}</p>
+            <h2 id="employee-name" class="employee-name"> ${person.name.first} ${person.name.last}</h2>
+            <p id="employee-email" class="employee-email"> ${person.email} <a href=""></a></p>
+            <p id="employee-location" class="employee-location"> ${person.location.city}</p>
+            </div>
             </div>
             </div>`;
             console.log(p);
-            $("#employee-card").append(p);
+            $(".card-group").append(p);
           }); // end forEach
         }); // end function(data)
       }; // end fetchInformation
@@ -54,39 +56,3 @@ $(document).ready(function() {
 
 
 
-  // const employeeCard = document.getElementById('employee-card');
-
-  // $('#employee-card').load("index.html", function() {
-  //   const template = results => {
-  //     $.each(
-  //       employeeCard.innerHTML += '<img src="' + ${results.picture.medium} + '" id="employee-avatar" class="employee-avatar" alt="Employee Picture">';
-  //       employeeCard.innerHTML += '<div id="employee-contact-info" class="employee-contact-info">';
-  //       employeeCard.innerHTML += '<h2 id="employee-name" class="employee-name">' + ${results.name.first} + ' ' + ${results.name.last} + '</h2>';
-  //       employeeCard.innerHTML += '<p id="employee-email" class="employee-email">' + ${results.email} + '<a href=""></a></p>';
-  //       employeeCard.innerHTML += '<p id="employee-location" class="employee-location">' + ${results.location.city} + '</p>';
-  //       employeeCard.innerHTML += '</div>';
-  //       employeeCard.innerHTML += '</div>';
-  //     );
-  //   )
-  // }
-
-
-// });
-
-
-
-
-// const template = results => {
-//   return '<img src="${results.picture.medium}" id="employee-avatar" class="employee-avatar" alt="Employee Picture">
-//         <div id="employee-contact-info" class="employee-contact-info">
-//           <h2 id="employee-name" class="employee-name">${results.name.first} ${results.name.last}</h2>
-//           <p id="employee-email" class="employee-email">${results.email}<a href=""></a></p>
-//           <p id="employee-location" class="employee-location">${results.location.city}</p>
-//         </div>
-//       </div>';
-// };
-
-// fetch('https://randomuser.me/api/?format=json&inc=picture,name,email,location,phone,dob&results=12', { method: 'get' })
-//   .then(response => response.json())
-//   .then(data => data.results.forEach(result => employeeCard.innerHTML += template(result)))
-//   .catch(error => console.log(error));
