@@ -7,28 +7,39 @@ $(document).ready(function() {
       console.log('ajax request success');
       console.log(data);
 
-      $('#employee-card').load('https://randomuser.me/api/?format=json&inc=picture,name,email,location,phone,dob&results=12', function(results) {
-            $('#employee-card').each(
-              $('#employee-card').innerHTML += '<img src="' + ${results.picture.medium} + '" id="employee-avatar" class="employee-avatar" alt="Employee Picture">';
-              $('#employee-card').innerHTML += '<div id="employee-contact-info" class="employee-contact-info">';
-              $('#employee-card').innerHTML += '<h2 id="employee-name" class="employee-name">' + ${results.name.first} + ' ' + ${results.name.last} + '</h2>';
-              $('#employee-card').innerHTML += '<p id="employee-email" class="employee-email">' + ${results.email} + '<a href=""></a></p>';
-              $('#employee-card').innerHTML += '<p id="employee-location" class="employee-location">' + ${results.location.city} + '</p>';
-              $('#employee-card').innerHTML += '</div>';
-              $('#employee-card').innerHTML += '</div>';
-            );
-          }
-        );
+      const randomUserURL = "https://randomuser.me/api/?format=json&inc=picture,name,email,location,phone,dob&results=12";
+      let p = '';
 
+      fetch(randomUserURL)
+        .then((response) => response.json())
+        .then(function(data){
+           url = "https://randomuser.me/api/?results=10&nat=AU&gender=male";
+           fetchInformation(randomUserURL);
+        })
 
-
-
-
-      },
+      function fetchInformation(randomUserURL){
+        fetch(randomUserURL)
+        .then((response) => response.json())
+        .then(function(data){
+          data.results.forEach(person => {
+            p = `<img src="${picture.medium}" id="employee-avatar" class="employee-avatar" alt="Employee Picture">
+            <div id="employee-contact-info" class="employee-contact-info">
+            <h2 id="employee-name" class="employee-name"> ${name.first} ${name.last}</h2>
+            <p id="employee-email" class="employee-email"> ${email} <a href=""></a></p>
+            <p id="employee-location" class="employee-location"> ${results.location.city}</p>
+            </div>
+            </div>`;
+            console.log(p);
+            $("#employee-card").append(p);
+          }); // end forEach
+        }, // end function(data)
+      } // end fetchInformation
+    }, // end success
     error: function(potato) {
-      console.log('error', potato);
-    }
-  });
+        console.log('error', potato);
+      } // end error
+  }); // end ajax
+}); // end document ready
 
 
 
@@ -37,7 +48,11 @@ $(document).ready(function() {
 
 
 
-});
+
+
+
+
+
 
   // const employeeCard = document.getElementById('employee-card');
 
