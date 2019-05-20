@@ -32,8 +32,8 @@ $(document).ready(function() {
             console.log(p);
             $("#employee-card").append(p);
           }); // end forEach
-        }, // end function(data)
-      } // end fetchInformation
+        }); // end function(data)
+      }; // end fetchInformation
     }, // end success
     error: function(potato) {
         console.log('error', potato);
