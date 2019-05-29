@@ -26,7 +26,7 @@ $(document).ready(function() {
             p = `<div id="employee-card" class="employee-card"> <!-- EMPLOYEE CARD -->
             <img src="${person.picture.medium}" id="employee-avatar" class="employee-avatar" alt="Employee Picture">
             <div id="employee-contact-info" class="employee-contact-info">
-            <h2 id="employee-name" class="employee-name"> ${person.name.first} ${person.name.last}</h2>
+            <h2 id="employee-name" class="employee-name" data-name="${person.name.first} ${person.name.last}">${person.name.first} ${person.name.last}</h2>
             <p id="employee-email" class="employee-email"> ${person.email} <a href=""></a></p>
             <p id="employee-location" class="employee-location"> ${person.location.city}</p>
             </div>
@@ -45,23 +45,32 @@ $(document).ready(function() {
 
 
   // SEARCH BOX
-  $("#searchBox").keyup(function(){
+  $("#searchBox").keyup(function(event){
+    // event.preventDefault();
+    console.log("1");
     // input field value for filtering
-    let filter = $(this).val().toLowerCase();
+    let $filter = $("input[type=search]").val().toLowerCase();
+    // let $name = $(this).find('#employee-name').attr('data-name').toLowerCase();
+    console.log("filter: " + $filter);
+    // console.log("name: " + $name);
 
     // if filter does not equal name: hide card
-    if (filter !== "") {
+    if ($filter !== '') {
+      console.log("2");
+      let $name = $(this).find('#employee-name').attr('data-name').toLowerCase();
+      console.log("name: " + $name);
       $('#employee-card').hide();
-      $('#employee-card').each(function(){
-        let firstName = $(this).find('h2').text("${person.name.first}").toLowerCase();
-        let lastName = $(this).find('h2').text("${person.name.last}").toLowerCase();
-
+      console.log("3");
+      Object.keys($name).forEach(function(){
+        console.log("4");
         // if filter does equal name: show card
-        if (firstName.indexOf(filter) >= 0 || lastName.indexOf(filter) >= 0) {
-          $(this).show();
+        if ($name.indexOf($filter) >= 0) {
+          console.log("5");
+          $('#employee-card').show();
         }
-      })
+      }) // end of forEach
     } else {
+      console.log("6");
       $('#employee-card').show();
     }
   });
