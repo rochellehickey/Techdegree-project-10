@@ -1,5 +1,6 @@
 $(document).ready(function() {
   // ADDING EMPLOYEES TO THE PAGE
+  // Accessing randomuser.me/api
   $.ajax({
     url: 'https://randomuser.me/api/?format=json&inc=picture,name,email,location,phone,dob&nat=us,dk,fr,gb,nz&results=12',
     dataType: 'json',
@@ -18,10 +19,12 @@ $(document).ready(function() {
            fetchInformation(randomUserURL);
         })
 
+      // Using randomuser.me to fill in HTML
       function fetchInformation(randomUserURL){
         fetch(randomUserURL)
         .then((response) => response.json())
         .then(function(data){
+          // Adding HTML to the page
           data.results.forEach(person => {
             p = `<div id="employee-card" class="employee-card"> <!-- EMPLOYEE CARD -->
             <img src="${person.picture.medium}" id="employee-avatar" class="employee-avatar" alt="Employee Picture">
@@ -46,37 +49,38 @@ $(document).ready(function() {
 
   // SEARCH BOX
   $("#searchBox").keyup(function(event){
-    // event.preventDefault();
-    console.log("1");
     // input field value for filtering
     let $filter = $("input[type=search]").val().toLowerCase();
-    // let $name = $(this).find('#employee-name').attr('data-name').toLowerCase();
-    console.log("filter: " + $filter);
-    // console.log("name: " + $name);
+    // getting array of names to compare to filter
+    let $name = $(this).find('#employee-name');
+    console.log("filter: " + $filter); // checking to see if key pressed equals filter value
+    console.log("name: " + JSON.stringify($name)); // checking to see if $name is an array
 
-    // if filter does not equal name: hide card
-    if ($filter !== '') {
-      console.log("2");
-      let $name = $(this).find('#employee-name').attr('data-name').toLowerCase();
-      console.log("name: " + $name);
-      $('#employee-card').hide();
-      console.log("3");
-      Object.keys($name).forEach(function(){
-        console.log("4");
-        // if filter does equal name: show card
-        if ($name.indexOf($filter) >= 0) {
-          console.log("5");
-          $('#employee-card').show();
-        }
-      }) // end of forEach
-    } else {
-      console.log("6");
-      $('#employee-card').show();
-    }
+
+    $name.filter(function() {
+        return $(this).text().toLowerCase().indexOf($filter) !== -1;
+    }).hide();
+
+
+
+    // if filter is not empty
+    // if ($filter !== '') {
+    //   // go through each employee name
+    //   Object.keys($name).forEach(function(){
+    //     // if name does not match filter: hide the employee card
+    //   $('#employee-card').hide();
+    //     // if filter does equal name: show card
+    //     if ($name.indexOf($filter)) {
+    //       $('#employee-card').show();
+    //     }
+    //   }) // end of forEach
+    // } else {
+    //   // else, show employee card
+    //   $('#employee-card').show();
+    // }
   });
 
-
-
+// .attr('data-name').toLowerCase();
 
 
 
