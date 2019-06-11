@@ -26,12 +26,12 @@ $(document).ready(function() {
         .then(function(data){
           // Adding HTML to the page
           data.results.forEach(person => {
-            p = `<div id="employee-card" class="employee-card"> <!-- EMPLOYEE CARD -->
-            <img src="${person.picture.medium}" id="employee-avatar" class="employee-avatar" alt="Employee Picture">
-            <div id="employee-contact-info" class="employee-contact-info">
-            <h2 id="employee-name" class="employee-name" data-name="${person.name.first} ${person.name.last}">${person.name.first} ${person.name.last}</h2>
-            <p id="employee-email" class="employee-email"> ${person.email} <a href=""></a></p>
-            <p id="employee-location" class="employee-location"> ${person.location.city}</p>
+            p = `<div class="employee-card"> <!-- EMPLOYEE CARD -->
+            <img src="${person.picture.medium}" class="employee-avatar" alt="Employee Picture">
+            <div class="employee-contact-info">
+            <h2 class="employee-name" data-name="${person.name.first} ${person.name.last}">${person.name.first} ${person.name.last}</h2>
+            <p class="employee-email"> ${person.email} <a href=""></a></p>
+            <p class="employee-location"> ${person.location.city}</p>
             </div>
             </div>
             </div>`;
@@ -50,37 +50,26 @@ $(document).ready(function() {
   // SEARCH BOX
   $("#searchBox").keyup(function(event){
     // input field value for filtering
-    let $filter = $("input[type=search]").val().toLowerCase();
-    // getting array of names to compare to filter
-    let $name = $(this).find('#employee-name');
-    console.log("filter: " + $filter); // checking to see if key pressed equals filter value
-    console.log("name: " + JSON.stringify($name)); // checking to see if $name is an array
+    let $searchFilter = $("input[type=search]").val().toLowerCase();
+    console.log("filter: " + $searchFilter); // checking to see if key pressed equals filter value
 
 
-    $name.filter(function() {
-        return $(this).text().toLowerCase().indexOf($filter) !== -1;
-    }).hide();
+      if ($searchFilter !== "") {
+        $('.employee-card').hide();
+        $('.employee-card').each(function(){
+          let $eNames = $(this).find('.employee-name').text();
 
+          // if filter does equal attribute: show thumbnail
+          if ($eNames.indexOf($searchFilter) >= 0) {
+            $(this).show();
+          }
+        })
+      } else {
+        $('.employee-card').show();
+      }
 
-
-    // if filter is not empty
-    // if ($filter !== '') {
-    //   // go through each employee name
-    //   Object.keys($name).forEach(function(){
-    //     // if name does not match filter: hide the employee card
-    //   $('#employee-card').hide();
-    //     // if filter does equal name: show card
-    //     if ($name.indexOf($filter)) {
-    //       $('#employee-card').show();
-    //     }
-    //   }) // end of forEach
-    // } else {
-    //   // else, show employee card
-    //   $('#employee-card').show();
-    // }
   });
 
-// .attr('data-name').toLowerCase();
 
 
 
