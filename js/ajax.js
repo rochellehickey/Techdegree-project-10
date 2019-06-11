@@ -53,20 +53,23 @@ $(document).ready(function() {
     let $searchFilter = $("input[type=search]").val().toLowerCase();
     console.log("filter: " + $searchFilter); // checking to see if key pressed equals filter value
 
+    // if search bar is not empty
+    if ($searchFilter !== "") {
+      // hide all the cards
+      $('.employee-card').hide();
+      // go through each card
+      $('.employee-card').each(function(){
+        // get all names on page
+        let $eNames = $(this).find('.employee-name').text();
 
-      if ($searchFilter !== "") {
-        $('.employee-card').hide();
-        $('.employee-card').each(function(){
-          let $eNames = $(this).find('.employee-name').text();
-
-          // if filter does equal attribute: show thumbnail
-          if ($eNames.indexOf($searchFilter) >= 0) {
-            $(this).show();
-          }
-        })
-      } else {
-        $('.employee-card').show();
-      }
+        // if search bar does equal the name: show card
+        if ($eNames.indexOf($searchFilter) >= 0) {
+          $(this).show();
+        }
+      })
+    } else {
+      $('.employee-card').show();
+    }
 
   });
 
