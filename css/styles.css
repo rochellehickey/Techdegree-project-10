@@ -65,6 +65,11 @@ p {
   display: flex;
   flex-direction: row;
   align-items: center;
+  text-decoration: none;
+}
+
+.employee-card:hover {
+  box-shadow: 5px -5px #B8B8B8;
 }
 
 .employee-contact-info {

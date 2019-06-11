@@ -26,15 +26,14 @@ $(document).ready(function() {
         .then(function(data){
           // Adding HTML to the page
           data.results.forEach(person => {
-            p = `<div class="employee-card"> <!-- EMPLOYEE CARD -->
+            p = `<a href="#" class="employee-card"> <!-- EMPLOYEE CARD -->
             <img src="${person.picture.medium}" class="employee-avatar" alt="Employee Picture">
             <div class="employee-contact-info">
-            <h2 class="employee-name" data-name="${person.name.first} ${person.name.last}">${person.name.first} ${person.name.last}</h2>
-            <p class="employee-email"> ${person.email} <a href=""></a></p>
-            <p class="employee-location"> ${person.location.city}</p>
+              <h2 class="employee-name" data-name="${person.name.first} ${person.name.last}">${person.name.first} ${person.name.last}</h2>
+              <p class="employee-email">${person.email}</p>
+            <p class="employee-location">${person.location.city}</p>
             </div>
-            </div>
-            </div>`;
+            </a>`;
             console.log(p);
             $(".card-group").append(p);
           }); // end forEach
