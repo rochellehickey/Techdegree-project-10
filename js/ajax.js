@@ -2,7 +2,7 @@ $(document).ready(function() {
   // ADDING EMPLOYEES TO THE PAGE
   // Accessing randomuser.me/api
   $.ajax({
-    url: 'https://randomuser.me/api/?format=json&inc=picture,name,email,location,phone,dob&nat=us,dk,fr,gb,nz&results=12',
+    url: 'https://randomuser.me/api/?format=json&inc=picture,name,email,location,phone,dob&nat=us,fr,gb,nz&results=12',
     dataType: 'json',
     type: 'GET',
     success: function(data) {
@@ -26,7 +26,7 @@ $(document).ready(function() {
         .then(function(data){
           // Adding HTML to the page
           data.results.forEach(person => {
-            p = `<a href="#more-info" class="employee-card"> <!-- EMPLOYEE CARD -->
+            p = `<a href="#${person.name.first}-${person.name.last}" class="employee-card"> <!-- EMPLOYEE CARD -->
             <img src="${person.picture.medium}" class="employee-avatar" alt="Employee Picture">
             <div class="employee-contact-info">
               <h2 class="employee-name" data-name="${person.name.first} ${person.name.last}">${person.name.first} ${person.name.last}</h2>
@@ -34,8 +34,8 @@ $(document).ready(function() {
             <p class="employee-location">${person.location.city}</p>
             </div>
             </a>
-            <div id="more-info" class="overlay">
-              <a href="#" class="close fas fa-times"></a>
+            <div id="${person.name.first}-${person.name.last}" class="overlay">
+              <a href="#" class="close"><span class="fas fa-times"></span></a>
               <img src="${person.picture.medium}" class="employee-avatar-overlay" alt="Employee Picture">
               <div class="employee-contact-info-overlay">
                 <h2 class="employee-name-overlay" data-name="${person.name.first} ${person.name.last}">${person.name.first} ${person.name.last}</h2>
@@ -45,6 +45,10 @@ $(document).ready(function() {
               <p class="employee-phone-overlay">${person.phone}</p>
               <p class="employee-address-overlay">${person.location.street}, ${person.location.city}, ${person.location.state} ${person.location.postcode}</p>
               <p class="employee-birthday-overlay">Birthday: ${person.dob.date}</p>
+              </div>
+              <div class="button-container">
+              <button class="back"><span class="fas fa-chevron-circle-left"></span></button>
+              <button class="next"><span class="fas fa-chevron-circle-right"></span></button>
               </div>
             </div>`;
             console.log(p);
@@ -84,10 +88,7 @@ $(document).ready(function() {
     }
   });
 
-  // MODAL WITH EXTRA EMPLOYEE INFO
-  // $('.employee-card').on('click', function() {
 
-  // });
 
 
 

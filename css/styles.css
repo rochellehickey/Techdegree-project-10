@@ -38,6 +38,10 @@ p {
   color: #B8B8B8;
 }
 
+hr {
+  margin: 20px 10px;
+}
+
 .visuallyhidden {
   border: 0;
   clip: rect(0 0 0 0);
@@ -88,13 +92,13 @@ p {
   display: block;
   width: 80px;
   height: auto;
-  margin: 10px auto;
+  margin: 20px auto 10px auto;
   border-radius: 100%;
 }
 
 .employee-name,
 .employee-name-overlay {
-  margin: 0 0 5px 0;
+  margin: 0 0 10px 0;
   text-transform: capitalize;
 }
 
@@ -104,11 +108,12 @@ p {
 
 .employee-email,
 .employee-email-overlay {
-  margin: 0;
+  margin: 0 0 10px 0;
 }
 
 .employee-email-overlay {
   text-align: center;
+  margin: 0 0 10px 0;
 }
 
 .employee-email a {
@@ -131,13 +136,18 @@ p {
 .employee-birthday-overlay {
   text-align: center;
   text-transform: capitalize;
+  margin: 0 0 10px 0;
 }
 
-#overlay {
+.employee-birthday-overlay {
+  margin-bottom: 20px;
+}
+
+.overlay {
   display: none;
 }
 
-#overlay:target {
+.overlay:target {
   display: block;
   background-color: #fff;
   padding: 20px 10px 10px 10px;
@@ -145,22 +155,44 @@ p {
   box-shadow: 0 4px 4px rgba(0,0,0,0.2);
   position: absolute;
   width: 500px;
-  top: 100px;
+  top: 200px;
   left: 50%;
   margin-left: -250px;
   z-index: 10; /* keep on top of other elements on the page */
-  outline: 9999px solid rgba(0,0,0,0.2);
+  outline: 9999px solid rgba(0,0,0,0.5);
 }
 
-.close.fas.fa-times {
-  width: 50px;
-  height: 50px;
+.fas {
+  color: #B8B8B8;
+}
+
+span.fas.fa-times {
+  font-size: 20px;
 }
 
 .close {
   position: absolute;
-  top: 5px;
-  right: 10px;
+  top: 20px;
+  right: 20px;
+}
+
+.overlay button.back,
+.overlay button.next {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto;
+  border: none;
+}
+
+span.fas.fa-chevron-circle-right,
+span.fas.fa-chevron-circle-left {
+  font-size: 20px;
+}
+
+.button-container {
+  display: flex;
+  flex-diretion: row;
+  justify-content: center;
 }
 
 #search-for-employee {
