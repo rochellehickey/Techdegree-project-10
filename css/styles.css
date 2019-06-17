@@ -84,13 +84,31 @@ p {
   border-radius: 100%;
 }
 
-.employee-name {
+.employee-avatar-overlay {
+  display: block;
+  width: 80px;
+  height: auto;
+  margin: 10px auto;
+  border-radius: 100%;
+}
+
+.employee-name,
+.employee-name-overlay {
   margin: 0 0 5px 0;
   text-transform: capitalize;
 }
 
-.employee-email {
+.employee-name-overlay {
+  text-align: center;
+}
+
+.employee-email,
+.employee-email-overlay {
   margin: 0;
+}
+
+.employee-email-overlay {
+  text-align: center;
 }
 
 .employee-email a {
@@ -98,9 +116,51 @@ p {
   color: #B8B8B8;
 }
 
-.employee-location {
+.employee-location,
+.employee-location-overlay {
   margin: 0;
   text-transform: capitalize;
+}
+
+.employee-location-overlay {
+  text-align: center;
+}
+
+.employee-phone-overlay,
+.employee-address-overlay,
+.employee-birthday-overlay {
+  text-align: center;
+  text-transform: capitalize;
+}
+
+#overlay {
+  display: none;
+}
+
+#overlay:target {
+  display: block;
+  background-color: #fff;
+  padding: 20px 10px 10px 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 4px rgba(0,0,0,0.2);
+  position: absolute;
+  width: 500px;
+  top: 100px;
+  left: 50%;
+  margin-left: -250px;
+  z-index: 10; /* keep on top of other elements on the page */
+  outline: 9999px solid rgba(0,0,0,0.2);
+}
+
+.close.fas.fa-times {
+  width: 50px;
+  height: 50px;
+}
+
+.close {
+  position: absolute;
+  top: 5px;
+  right: 10px;
 }
 
 #search-for-employee {

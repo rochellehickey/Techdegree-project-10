@@ -26,14 +26,27 @@ $(document).ready(function() {
         .then(function(data){
           // Adding HTML to the page
           data.results.forEach(person => {
-            p = `<a href="#" class="employee-card"> <!-- EMPLOYEE CARD -->
+            p = `<a href="#more-info" class="employee-card"> <!-- EMPLOYEE CARD -->
             <img src="${person.picture.medium}" class="employee-avatar" alt="Employee Picture">
             <div class="employee-contact-info">
               <h2 class="employee-name" data-name="${person.name.first} ${person.name.last}">${person.name.first} ${person.name.last}</h2>
               <p class="employee-email">${person.email}</p>
             <p class="employee-location">${person.location.city}</p>
             </div>
-            </a>`;
+            </a>
+            <div id="more-info" class="overlay">
+              <a href="#" class="close fas fa-times"></a>
+              <img src="${person.picture.medium}" class="employee-avatar-overlay" alt="Employee Picture">
+              <div class="employee-contact-info-overlay">
+                <h2 class="employee-name-overlay" data-name="${person.name.first} ${person.name.last}">${person.name.first} ${person.name.last}</h2>
+                <p class="employee-email-overlay">${person.email}</p>
+              <p class="employee-location-overlay">${person.location.city}</p>
+              <hr>
+              <p class="employee-phone-overlay">${person.phone}</p>
+              <p class="employee-address-overlay">${person.location.street}, ${person.location.city}, ${person.location.state} ${person.location.postcode}</p>
+              <p class="employee-birthday-overlay">Birthday: ${person.dob.date}</p>
+              </div>
+            </div>`;
             console.log(p);
             $(".card-group").append(p);
           }); // end forEach
@@ -69,8 +82,13 @@ $(document).ready(function() {
     } else {
       $('.employee-card').show();
     }
-
   });
+
+  // MODAL WITH EXTRA EMPLOYEE INFO
+  // $('.employee-card').on('click', function() {
+
+  // });
+
 
 
 
