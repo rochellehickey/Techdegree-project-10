@@ -176,8 +176,8 @@ span.fas.fa-times {
   right: 20px;
 }
 
-.overlay button.back,
-.overlay button.next {
+.overlay a.back,
+.overlay a.next {
   width: 40px;
   height: 40px;
   margin: 0 auto;

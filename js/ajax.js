@@ -47,8 +47,8 @@ $(document).ready(function() {
               <p class="employee-birthday-overlay">Birthday: ${person.dob.date}</p>
               </div>
               <div class="button-container">
-              <button class="back"><span class="fas fa-chevron-circle-left"></span></button>
-              <button class="next"><span class="fas fa-chevron-circle-right"></span></button>
+              <a href="#" class="back"><span class="fas fa-chevron-circle-left"></span></a>
+              <a href="#" class="next"><span class="fas fa-chevron-circle-right"></span></a>
               </div>
             </div>`;
             console.log(p);
@@ -88,9 +88,35 @@ $(document).ready(function() {
     }
   });
 
+  // NAVIGATING BETWEEN MODALS
+  // if the NEXT link is clicked in the overlay
+  $(document).on('click', '.next', function() {
+    console.log("clicked");
+    // getting all the .overlay in an array
+    let $overlay = $('.overlay');
+    console.log($overlay);
+    // getting the current .overlay displayed
+    let $currentOverlay = $overlay.find($(this));
+    console.log($currentOverlay);
+
+    // if($overlay.indexOf($(this)) >= 0) {
+    //   let $nextOverlay = $overlay.next();
+    //   return $nextOverlay;
+    // }
 
 
+  });
 
+  // if the BACK link is clicked in the overlay
+  $(document).on('click', '.back', function() {
+    console.log("clicked");
+    let $overlay = $('.overlay');
+    let $previousOverlay = $overlay.prev();
+
+      console.log("back");
+      $previousOverlay.show();
+
+  });
 
 
 
