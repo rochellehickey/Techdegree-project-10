@@ -92,29 +92,23 @@ $(document).ready(function() {
   // if the NEXT link is clicked in the overlay
   $(document).on('click', '.next', function() {
     console.log("clicked");
-    // getting all the .overlay in an array
-    let $overlay = $('.overlay');
-    console.log($overlay);
-    // getting the current .overlay displayed
-    let $currentOverlay = $overlay.find($(this));
-    console.log($currentOverlay);
 
-    // if($overlay.indexOf($(this)) >= 0) {
-    //   let $nextOverlay = $overlay.next();
-    //   return $nextOverlay;
-    // }
+    // traverse to parent .overlay
+    // traverse to next .employee-card that doesn't have display:none;
+    // traverse to next sibling .overlay
+    // get id of next sibling .overlay
+    $nextOverlay = $(this).css('background-color', 'red');
 
+    // push id of next sibling .overlay to URL bar
 
   });
 
+
+
+
+
   // if the BACK link is clicked in the overlay
   $(document).on('click', '.back', function() {
-    console.log("clicked");
-    let $overlay = $('.overlay');
-    let $previousOverlay = $overlay.prev();
-
-      console.log("back");
-      $previousOverlay.show();
 
   });
 
