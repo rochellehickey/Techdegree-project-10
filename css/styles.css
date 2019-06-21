@@ -145,10 +145,6 @@ hr {
 
 .overlay {
   display: none;
-}
-
-.overlay:target {
-  display: block;
   background-color: #fff;
   padding: 20px 10px 10px 10px;
   border-radius: 5px;
@@ -160,6 +156,10 @@ hr {
   margin-left: -250px;
   z-index: 10; /* keep on top of other elements on the page */
   outline: 9999px solid rgba(0,0,0,0.5);
+}
+
+.overlay.show {
+  display: block !important;
 }
 
 .fas {
@@ -176,8 +176,8 @@ span.fas.fa-times {
   right: 20px;
 }
 
-.overlay a.back,
-.overlay a.next {
+.overlay button.back,
+.overlay button.next {
   width: 40px;
   height: 40px;
   margin: 0 auto;

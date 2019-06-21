@@ -6,16 +6,13 @@ $(document).ready(function() {
     dataType: 'json',
     type: 'GET',
     success: function(data) {
-      console.log('ajax request success');
-      console.log(data);
 
-      const randomUserURL = "https://randomuser.me/api/?format=json&inc=picture,name,email,location,phone,dob&nat=us,dk,fr,gb,nz&results=12";
+      const randomUserURL = "https://randomuser.me/api/?format=json&inc=picture,name,email,location,phone,dob&nat=us,fr,gb,nz&results=12";
       let p = '';
 
       fetch(randomUserURL)
         .then((response) => response.json())
         .then(function(data){
-           url = "https://randomuser.me/api/?format=json&inc=picture,name,email,location,phone,dob&nat=us,dk,fr,gb,nz&results=12";
            fetchInformation(randomUserURL);
         })
 
@@ -47,11 +44,10 @@ $(document).ready(function() {
               <p class="employee-birthday-overlay">Birthday: ${person.dob.date}</p>
               </div>
               <div class="button-container">
-              <a href="#" class="back"><span class="fas fa-chevron-circle-left"></span></a>
-              <a href="#" class="next"><span class="fas fa-chevron-circle-right"></span></a>
+              <button class="back"><span class="fas fa-chevron-circle-left"></span></button>
+              <button class="next"><span class="fas fa-chevron-circle-right"></span></button>
               </div>
             </div>`;
-            console.log(p);
             $(".card-group").append(p);
           }); // end forEach
         }); // end function(data)
@@ -67,7 +63,6 @@ $(document).ready(function() {
   $("#searchBox").keyup(function(event){
     // input field value for filtering
     let $searchFilter = $("input[type=search]").val().toLowerCase();
-    console.log("filter: " + $searchFilter); // checking to see if key pressed equals filter value
 
     // if search bar is not empty
     if ($searchFilter !== "") {
@@ -88,33 +83,39 @@ $(document).ready(function() {
     }
   });
 
+
   // NAVIGATING BETWEEN MODALS
-  // if the NEXT link is clicked in the overlay
-  $(document).on('click', '.next', function() {
-    console.log("clicked");
-
-    // traverse to parent .overlay
-    // traverse to next .employee-card that doesn't have display:none;
-    // traverse to next sibling .overlay
-    // get id of next sibling .overlay
-    $nextOverlay = $(this).css('background-color', 'red');
-
-    // push id of next sibling .overlay to URL bar
-
+  // Opens Modal
+  $(document).on('click', '.employee-card', function() {
+    $overlayID = $(this).attr('href');
+    $($overlayID).addClass('show');
+    event.preventDefault();
   });
 
+  // Closes Modal
+  $(document).on('click', '.close', function() {
+    $(this).closest('.overlay').removeClass('show');
+    event.preventDefault();
+  });
 
-
-
+  // if the NEXT link is clicked in the overlay
+  $(document).on('click', '.next', function() {
+    $thisOverlay = $(this).closest('.overlay');
+    $nextOverlay = $(this).closest('.overlay').nextAll('.employee-card:visible').first().next();
+    console.log($nextOverlay);
+    $($thisOverlay).removeClass('show');
+    $($nextOverlay).addClass('show');
+    event.preventDefault();
+  });
 
   // if the BACK link is clicked in the overlay
   $(document).on('click', '.back', function() {
-
+    $thisOverlay = $(this).closest('.overlay');
+    $prevOverlay = $(this).closest('.overlay').prevAll('.employee-card:visible').eq(1).next();
+    $($thisOverlay).removeClass('show');
+    $($prevOverlay).addClass('show');
+    event.preventDefault();
   });
-
-
-
-
 
 }); // end document ready
 
