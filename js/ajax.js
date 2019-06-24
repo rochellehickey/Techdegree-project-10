@@ -89,12 +89,14 @@ $(document).ready(function() {
   $(document).on('click', '.employee-card', function() {
     $overlayID = $(this).attr('href');
     $($overlayID).addClass('show');
+    $('#screen').addClass('show');
     event.preventDefault();
   });
 
   // Closes Modal
   $(document).on('click', '.close', function() {
     $(this).closest('.overlay').removeClass('show');
+    $('#screen').removeClass('show');
     event.preventDefault();
   });
 
