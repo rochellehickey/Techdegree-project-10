@@ -102,18 +102,35 @@ $(document).ready(function() {
   $(document).on('click', '.next', function() {
     $thisOverlay = $(this).closest('.overlay');
     $nextOverlay = $(this).closest('.overlay').nextAll('.employee-card:visible').first().next();
-    console.log($nextOverlay);
-    $($thisOverlay).removeClass('show');
-    $($nextOverlay).addClass('show');
+    $firstOverlay = $(this).closest('.overlay').prevAll('.employee-card:visible').last().next();
+
+
+    if ($nextOverlay.length > 0) {
+      $('.overlay').removeClass('show');
+      $($nextOverlay).addClass('show');
+    } else {
+      $($thisOverlay).removeClass('show');
+      $($firstOverlay).addClass('show');
+    }
+
     event.preventDefault();
+
   });
 
   // if the BACK link is clicked in the overlay
   $(document).on('click', '.back', function() {
     $thisOverlay = $(this).closest('.overlay');
     $prevOverlay = $(this).closest('.overlay').prevAll('.employee-card:visible').eq(1).next();
-    $($thisOverlay).removeClass('show');
-    $($prevOverlay).addClass('show');
+    $lastOverlay = $(this).closest('.overlay').nextAll('.employee-card:visible').last().next();
+
+    if ($prevOverlay.length > 0) {
+      $('.overlay').removeClass('show');
+      $($prevOverlay).addClass('show');
+    } else {
+      $($thisOverlay).removeClass('show');
+      $($lastOverlay).addClass('show');
+    }
+
     event.preventDefault();
   });
 
